@@ -1,0 +1,24 @@
+<class 'tomlkit.exceptions.UnexpectedCharError'>
+Unexpected character: u'x' at line 38 col 47
+<traceback object at 0x25503418>
+<class 'tomlkit.exceptions.UnexpectedCharError'>
+Unexpected character: u'\n' at line 3 col 16
+<traceback object at 0x235044E0>
+<class 'tomlkit.exceptions.UnexpectedCharError'>
+Unexpected character: u'\n' at line 3 col 16
+<traceback object at 0x235191E8>
+<class 'tomlkit.exceptions.UnexpectedCharError'>
+Unexpected character: u'\n' at line 3 col 16
+<traceback object at 0x234AE878>
+<class 'tomlkit.exceptions.KeyAlreadyPresent'>
+Key ""caster record from history file"" already exists.
+<traceback object at 0x24569D78>
+<class 'tomlkit.exceptions.KeyAlreadyPresent'>
+Key ""caster record from history file"" already exists.
+<traceback object at 0x24534D78>
+<class 'tomlkit.exceptions.KeyAlreadyPresent'>
+Key ""caster record from history file"" already exists.
+<traceback object at 0x24572DA0>
+<class 'tomlkit.exceptions.InvalidUnicodeValueError'>
+Invalid unicode value at line 14 col 26
+<traceback object at 0x244CC120>
