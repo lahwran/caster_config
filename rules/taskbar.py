@@ -113,7 +113,7 @@ def extract(x):
                 results.append(a.strip())
     #print(results)
     rated = sorted([(rating(a), a) for a in set(results)])
-    pprint.pprint(rated)
+    #pprint.pprint(rated)
     return [" ".join(y.split()) for cost, y in rated if cost <10]
 
 def info():
@@ -217,4 +217,4 @@ defaults = {
 # This stuff is required too -- However you will learn more about how to change the rule types and contexts laterr
 def get_rule():
     return Taskbar, RuleDetails(name="taskbar")
-# lastupdate: 2020-11-20 12:12:44.958841
+# lastupdate: 2020-11-20 14:52:55.562121
