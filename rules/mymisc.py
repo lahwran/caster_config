@@ -1,7 +1,3 @@
-# These lines that start with the # are called comments. They don't affect the way the code runs.
-# In this tutorial file, I put comments above the relevant lines.
-
-# You can skip down to the next comment, for now this is not important...
 from __future__ import print_function
 
 import pprint
@@ -11,7 +7,7 @@ from dragonfly import (MappingRule, BringApp, Key, Function, Grammar, Playback,
                        IntegerRef, Dictation, Choice, WaitWindow)
 
 import subprocess
-from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
+from castervoice.lib.ctrl.rule_details import RuleDetails
 from castervoice.lib.actions import Key, Text, Mouse
 from castervoice.lib.merge.additions import IntegerRefST
 from castervoice.lib.merge.mergerule import MergeRule

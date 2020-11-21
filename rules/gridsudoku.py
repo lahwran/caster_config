@@ -6,7 +6,7 @@ from castervoice.lib.const import CCRType
 from castervoice.lib.merge.mergerule import MergeRule
 from castervoice.lib import control, navigation
 from castervoice.lib.actions import Mouse
-from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
+from castervoice.lib.ctrl.rule_details import RuleDetails
 from castervoice.lib.merge.additions import IntegerRef
 from castervoice.lib.merge.state.short import R
 from castervoice.rules.ccr.standard import SymbolSpecs

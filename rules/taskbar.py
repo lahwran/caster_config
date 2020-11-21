@@ -10,7 +10,7 @@ import re
 from dragonfly import (MappingRule, BringApp, Key, Function, Grammar, Playback,
                        IntegerRef, Dictation, Choice, WaitWindow)
 
-from castervoice.lib.ctrl.mgr.rule_details import RuleDetails
+from castervoice.lib.ctrl.rule_details import RuleDetails
 from castervoice.lib.actions import Key, Text, Mouse
 from castervoice.lib.merge.additions import IntegerRefST
 from castervoice.lib.merge.mergerule import MergeRule
@@ -19,7 +19,17 @@ import logging
 import time
 import json
 import os
+import subprocess
 logging.getLogger("engine").setLevel(logging.DEBUG)
+
+
+def focus_action(title):
+    print("create action to focus to :", title)
+    def inner():
+        command = ["nircmd", "win", "activate", "stitle", title["name"].rpartition(" -")[0][:30]]
+        print("trigger action :", command)
+        subprocess.call(command)
+    return Function(inner)
 
 def load_context():
     current_desktop = virtual_desktops.get_current_desktop()
@@ -137,10 +147,7 @@ def info():
     num_template = "focus %s %s"
     for index, tasks in sorted(by_automation_id.values()):
         for taskindex, task in enumerate(tasks):
-            if len(tasks)  == 1:
-                action = Key("w-%s/30"%index)
-            else:
-                action = Key(",".join(["w-%s" %index] *(1+taskindex)) + "/40,space")
+            action = focus_action(task)
             if taskindex > 0 and taskindex < len(number_names):
                 for word in task["program_words"]:
                     bindings.setdefault(num_template%(word.lower(), number_names[taskindex]),action)
@@ -217,4 +224,4 @@ defaults = {
 # This stuff is required too -- However you will learn more about how to change the rule types and contexts laterr
 def get_rule():
     return Taskbar, RuleDetails(name="taskbar")
-# lastupdate: 2020-11-20 14:52:55.562121
+# lastupdate: 2020-11-20 23:12:46.798288

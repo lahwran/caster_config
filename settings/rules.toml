@@ -1,4 +1,4 @@
-_enabled_ordered = ["Alphabet", "Navigation", "NavigationNon", "Numbers", "Punctuation", "CasterRule", "HardwareRule", "WindowManagementRule", "SudokuGridRule", "HMCRule", "HMCConfirmRule", "HMCDirectoryRule", "HMCHistoryRule", "HMCLaunchRule", "HMCSettingsRule", "HistoryRule", "ChainAlias", "Alias", "BringRule", "Again", "IERule", "DragonRule", "GrammarActivatorRule", "HooksActivationRule", "ChromeRule", "GitBashRule", "NPPRule", "JetbrainsRule", "Taskbar", "UnityRule", "MiscellaneousRule"]
+_enabled_ordered = ["Alphabet", "Navigation", "NavigationNon", "Numbers", "Punctuation", "CasterRule", "HardwareRule", "WindowManagementRule", "SudokuGridRule", "ChainAlias", "Alias", "BringRule", "Again", "IERule", "DragonRule", "GrammarActivatorRule", "HooksActivationRule", "ChromeRule", "GitBashRule", "NPPRule", "JetbrainsRule", "UnityRule", "MiscellaneousRule", "Taskbar"]
 _internal = ["GrammarActivatorRule", "HooksActivationRule", "TransformersActivationRule", "ManualGrammarReloadRule"]
 
 [whitelisted]
