@@ -1,5 +1,9 @@
 from __future__ import print_function
 
+import datetime
+
+from castervoice.lib.merge.state.short import R
+
 import pprint
 import re
 
@@ -18,21 +22,61 @@ import json
 import os
 logging.getLogger("engine").setLevel(logging.DEBUG)
 
-def take_note(textnv):
-    print("note:", textnv)
-    with open("//wsl$/Ubuntu-20.04/home/lahwran/notes/inbox.txt", "ab") as w:
-        w.write(textnv+"\n")
-    subprocess.Popen(["nircmd", "trayballoon", "New Note", textnv, "shell32.dll,22", "1500"])
-    pass
+def note_path(filename):
+    fullpath = os.path.join("//wsl$/Ubuntu-20.04/home/lahwran/notes", filename)
+    directory = os.path.dirname(fullpath)
+    try:
+        os.makedirs(directory)
+    except OSError:
+        pass
+    with open(fullpath, "ab") as w:
+        w.write("")
+    return fullpath
 
-def jump_to_notes():
-    subprocess.call(["pycharm.cmd", "\\\\wsl$\\Ubuntu-20.04\\home\\lahwran\\notes\\", "\\\\wsl$\\Ubuntu-20.04\\home\\lahwran\\notes\\inbox.txt"])
+def generic_take_note(filename, textnv):
+    print("note:", textnv)
+    fullpath = note_path(filename)
+    with open(fullpath, "ab") as w:
+        w.write(textnv+"\n")
+    subprocess.Popen(["nircmd", "trayballoon", "New Note %s" %filename, textnv, "shell32.dll,22", "1500"])
+    subprocess.Popen(["powershell", "-c", "(New-Object Media.SoundPlayer \"C:\\Windows\\Media\\notify.wav\").PlaySync();"])
+
+def take_note(textnv):
+    generic_take_note("inbox.txt", textnv)
+
+def take_note_daily(textnv):
+    generic_take_note(formatted_date(), textnv)
+
+
+def formatted_date():
+    return datetime.datetime.now().strftime("/daily-%Y/%m%B-%d%a.txt")
+
+
+def generic_jump_to_notes(filename):
+    fullpath = note_path(filename)
+    subprocess.call(["pycharm.cmd", "\\\\wsl$\\Ubuntu-20.04\\home\\lahwran\\notes\\", fullpath.replace("/","\\")])
     time.sleep(0.5)
     subprocess.call(["nircmd", "win", "activate", "stitle", "notes ["])
+
+def jump_to_notes():
+    generic_jump_to_notes("inbox.txt")
+
+def jump_to_notes_daily():
+    generic_jump_to_notes(formatted_date())
+
+def stop_grid():
+    subprocess.call(["taskkill", "/F", "/IM", "GridOverlay.exe", "/T"])
+
+def start_grid():
+    subprocess.Popen(["C:/Users/Lauren/RiderProjects/GameOverlay.Net/source/Examples/bin/Release/GridOverlay.exe"], )
 
 class MiscellaneousRule(MappingRule):
 
     mapping = {
+        "grid overlay close":
+            R(Function(stop_grid)),
+        "grid overlay open":
+            R(Function(start_grid)),
         #"hotel info":                  Text("These types of hospitality industry are not cheap."),
 
         #'(motel | lodging)':           Playback([(["hotel", "info"], 0.0)]),
@@ -48,6 +92,8 @@ class MiscellaneousRule(MappingRule):
 
         "(take note|techno) <textnv>":           Function(take_note),
         "bring me notes": Function(jump_to_notes),
+        "daily note <textnv>": Function(take_note_daily),
+        "bring me daily notes": Function(jump_to_notes_daily),
 
     }
 

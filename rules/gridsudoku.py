@@ -8,8 +8,8 @@ from castervoice.lib import control, navigation
 from castervoice.lib.actions import Mouse
 from castervoice.lib.ctrl.rule_details import RuleDetails
 from castervoice.lib.merge.additions import IntegerRef
-from castervoice.lib.merge.state.short import R
 from castervoice.rules.ccr.standard import SymbolSpecs
+from castervoice.lib.merge.state.short import R
 
 
 # Perform an action based on the passed in action number
@@ -85,9 +85,6 @@ def drag_mouse(xn, yn, hexdigit):
 
 
 
-def stop_grid():
-    subprocess.call(["taskkill", "/F", "/IM", "GridOverlay.exe", "/T"])
-
 
 
 
@@ -106,8 +103,6 @@ class SudokuGridRule(MergeRule):
 
         "drag <xn> by <yn> [grid <hexdigit>]":
             R(Function(drag_mouse)),
-        "stop grid overlay":
-            R(Function(stop_grid)),
     }
     extras = [
         IntegerRef("yn", -1, 100),
